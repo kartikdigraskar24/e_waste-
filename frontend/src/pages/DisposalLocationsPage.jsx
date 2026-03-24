@@ -13,7 +13,10 @@ export default function DisposalLocationsPage() {
   useEffect(() => {
     axios
       .get(`${API}/locations`)
-      .then((res) => setLocations(res.data))
+      .then((res) => {
+        const dataArray = Array.isArray(res.data) ? res.data : res.data.value || [];
+        setLocations(dataArray);
+      })
       .catch(() => setError('Could not load locations. Please ensure the backend is running.'))
       .finally(() => setLoading(false));
   }, []);

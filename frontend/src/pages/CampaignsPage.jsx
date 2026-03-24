@@ -49,7 +49,10 @@ export default function CampaignsPage() {
   useEffect(() => {
     axios
       .get(`${API}/campaigns`)
-      .then((res) => setCampaigns(res.data))
+      .then((res) => {
+        const dataArray = Array.isArray(res.data) ? res.data : res.data.value || [];
+        setCampaigns(dataArray);
+      })
       .catch(() => setError('Could not load campaigns. Please ensure the backend server is running.'))
       .finally(() => setLoading(false));
   }, []);

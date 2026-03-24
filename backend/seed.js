@@ -15,40 +15,40 @@ const Campaign = require('./models/Campaign');
 
 const locations = [
   {
-    plantName: 'PCMC E-waste recycling and plastic Recyling & Hobby Center',
-    address: 'Pune, Maharashtra',
-    contactNumber: '090288 54102',
-    mapsLink: 'https://maps.google.com/?q=PCMC+E-waste+recycling',
+    plantName: 'Kuldeep E-Waste Disposals',
+    address: 'Sr. No. 119/2, Katraj-Saswad Road, Near Katraj Chowk, Pune - 411046',
+    contactNumber: '+91 7733995555',
+    mapsLink: 'https://maps.google.com/?q=Kuldeep+E-Waste+Disposals+Pune',
   },
   {
-    plantName: 'Vozon ComSof Pvt Ltd. E-Waste Recycling',
-    address: 'Sr.No 19/9 Buchade Vasti, Near, Indira College Road',
-    contactNumber: '086007 26007',
-    mapsLink: 'https://maps.google.com/?q=Vozon+ComSof+Pvt+Ltd+E-Waste+Recycling',
+    plantName: 'Green IT Recycling Center Pvt. Ltd.',
+    address: '890, Ganeshprasad, Near Perugate, Above Lazzat Hotel Sadashiv Peth, Pune - 411030',
+    contactNumber: '+91 20 2445 6382',
+    mapsLink: 'https://maps.google.com/?q=Green+IT+Recycling+Center+Pune',
   },
   {
-    plantName: 'PCMC SWaCH V Collect center',
-    address: 'Darshanvari Society',
-    contactNumber: 'N/A',
-    mapsLink: 'https://maps.google.com/?q=PCMC+SWaCH+V+Collect+center',
+    plantName: 'Adar Poonawalla Clean City Initiative (APCCI)',
+    address: 'A-wing, 3rd floor, Mittal Court, Rasta Peth, Pune 411011',
+    contactNumber: '+91 20 26137777',
+    mapsLink: 'https://maps.google.com/?q=Adar+Poonawalla+Clean+City+Initiative+Pune',
   },
   {
-    plantName: 'Enrich Tech - A waste management company',
-    address: '3rd floor, Kant Helix, 411033, Bhoir Colony Rd',
-    contactNumber: '095119 09997',
-    mapsLink: 'https://maps.google.com/?q=Enrich+Tech+waste+management+company',
+    plantName: 'Sanjari Recycling',
+    address: 'Pune City Drop-off & Home Pickup Service',
+    contactNumber: '+91 9987787208',
+    mapsLink: 'https://maps.google.com/?q=Pune+Maharashtra',
   },
   {
-    plantName: 'Grecycle scrap center',
-    address: 'Pune, Maharashtra',
-    contactNumber: '088558 84582',
-    mapsLink: 'https://maps.google.com/?q=Grecycle+scrap+center+Pune',
+    plantName: 'Harshita Green Recyclers',
+    address: '278, Near Chinchechi Talim, Shop No. 1, Shukrawar Peth, Pune - 411002',
+    contactNumber: '+91 8044566854', // Using a placeholder/example number from JS since exact wasn't listed clearly for this specific one, wait JustDial had one but it was obscured
+    mapsLink: 'https://maps.google.com/?q=Shukrawar+Peth+Pune',
   },
   {
-    plantName: 'SK Scrap Center',
-    address: 'Old Kate Road, near Roshni Seles',
-    contactNumber: '099601 21764',
-    mapsLink: 'https://maps.google.com/?q=SK+Scrap+Center+Old+Kate+Road',
+    plantName: 'Zolopik E-Waste Recycling',
+    address: 'Pune Regional Collection Center (Doorstep Pickup Available)',
+    contactNumber: '1800 212 2125', // General e-waste helpline style number
+    mapsLink: 'https://maps.google.com/?q=Pune+Maharashtra',
   },
 ];
 

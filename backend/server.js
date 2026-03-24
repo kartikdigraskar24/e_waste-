@@ -16,9 +16,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
-// Allow requests from allowed origins
-const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://localhost:3000'].filter(Boolean);
-app.use(cors({ origin: allowedOrigins }));
+// Allow requests from allowed origins (any localhost port or Vercel specific ones)
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || origin.startsWith('http://localhost:') || origin === process.env.FRONTEND_URL) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+};
+app.use(cors(corsOptions));
 app.use(express.json()); // parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // parse form data
 

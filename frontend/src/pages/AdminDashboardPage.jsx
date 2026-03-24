@@ -44,8 +44,12 @@ export default function AdminDashboardPage() {
           axios.get(`${API}/campaigns/all`, authHeaders()),
           axios.get(`${API}/locations`),
         ]);
-        setCampaigns(campRes.data);
-        setLocations(locRes.data);
+        
+        const campaignsData = Array.isArray(campRes.data) ? campRes.data : campRes.data.value || [];
+        const locationsData = Array.isArray(locRes.data) ? locRes.data : locRes.data.value || [];
+        
+        setCampaigns(campaignsData);
+        setLocations(locationsData);
       } catch (err) {
         if (err.response?.status === 401) {
           navigate('/admin/login');
