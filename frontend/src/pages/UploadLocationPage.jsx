@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API = import.meta.env.VITE_API_URL || '/api';
 
 export default function UploadLocationPage() {
   const [form, setForm] = useState({

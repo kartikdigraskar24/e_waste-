@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
+const API = import.meta.env.VITE_API_URL || '/api';
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 function CampaignCard({ campaign }) {
   const imageUrl = campaign.imageUrl
