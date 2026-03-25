@@ -1,16 +1,52 @@
-// Campaigns Page — fetches and displays approved awareness campaigns from API
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+// Campaigns Page — hardcoded Pune e-waste awareness campaigns
 import { Link } from 'react-router-dom';
 
-const API = import.meta.env.VITE_API_URL || '/api';
-const API_BASE = import.meta.env.VITE_API_BASE || '';
+const CAMPAIGNS = [
+  {
+    _id: '1',
+    title: 'E-Waste Awareness Drive — Aundh',
+    description: 'A community-led campaign in Aundh, Pune to educate residents about safe disposal of old electronics. Free e-waste collection camp organized in partnership with PMC.',
+    date: '2025-02-15',
+    location: 'Aundh, Pune',
+  },
+  {
+    _id: '2',
+    title: 'Green Campus Initiative — COEP',
+    description: 'COEP Technological University launched a campus-wide e-waste collection drive. Students collected over 200 kg of old gadgets, batteries and cables for certified recycling.',
+    date: '2025-03-01',
+    location: 'COEP, Shivajinagar, Pune',
+  },
+  {
+    _id: '3',
+    title: "Don't Trash It — Recycle It!",
+    description: 'A social media and on-ground campaign in Kothrud urging citizens to stop dumping e-waste in landfills. Partnered with local NGO GreenMind to organize drop-off points across the area.',
+    date: '2025-01-20',
+    location: 'Kothrud, Pune',
+  },
+  {
+    _id: '4',
+    title: 'School E-Waste Education Program',
+    description: 'Workshop series conducted across 10 schools in Pune to teach students about hazardous materials in electronics and the importance of responsible e-waste disposal.',
+    date: '2025-03-10',
+    location: 'Various Schools, Pune',
+  },
+  {
+    _id: '5',
+    title: 'Corporate E-Waste Amnesty — Hinjewadi IT Park',
+    description: 'IT companies in Hinjewadi were encouraged to surrender unused laptops, servers and peripherals. Over 1 tonne of e-waste was collected and sent to certified recyclers.',
+    date: '2025-02-28',
+    location: 'Hinjewadi, Pune',
+  },
+  {
+    _id: '6',
+    title: 'Battery Recycling Awareness — Hadapsar',
+    description: 'Targeted campaign focused on lithium battery disposal dangers. Set up collection bins at 15 locations across Hadapsar and Magarpatta for safe battery drop-off.',
+    date: '2025-03-18',
+    location: 'Hadapsar, Pune',
+  },
+];
 
 function CampaignCard({ campaign }) {
-  const imageUrl = campaign.imageUrl
-    ? `${API_BASE}${campaign.imageUrl}`
-    : null;
-
   const formattedDate = new Date(campaign.date).toLocaleDateString('en-IN', {
     year: 'numeric',
     month: 'long',
@@ -19,12 +55,7 @@ function CampaignCard({ campaign }) {
 
   return (
     <div className="campaign-card">
-      {/* Image or placeholder */}
-      {imageUrl ? (
-        <img src={imageUrl} alt={campaign.title} className="campaign-card-img" />
-      ) : (
-        <div className="campaign-card-img-placeholder">📢</div>
-      )}
+      <div className="campaign-card-img-placeholder">📢</div>
       <div className="campaign-card-body">
         <h3 style={{ fontSize: '1.05rem', marginBottom: '0.5rem' }}>{campaign.title}</h3>
         <p style={{ fontSize: '0.9rem', marginBottom: '0.75rem' }}>
@@ -42,21 +73,6 @@ function CampaignCard({ campaign }) {
 }
 
 export default function CampaignsPage() {
-  const [campaigns, setCampaigns] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    axios
-      .get(`${API}/campaigns`)
-      .then((res) => {
-        const dataArray = Array.isArray(res.data) ? res.data : res.data.value || [];
-        setCampaigns(dataArray);
-      })
-      .catch(() => setError('Could not load campaigns. Please ensure the backend server is running.'))
-      .finally(() => setLoading(false));
-  }, []);
-
   return (
     <div>
       {/* Page Banner */}
@@ -77,42 +93,14 @@ export default function CampaignsPage() {
 
       <section className="section">
         <div className="container">
-          {/* Loading */}
-          {loading && (
-            <div className="loading-container">
-              <div className="spinner"></div>
-              <p>Loading campaigns...</p>
-            </div>
-          )}
-
-          {/* Error */}
-          {error && <div className="alert alert-error">{error}</div>}
-
-          {/* Campaign Grid */}
-          {!loading && !error && campaigns.length > 0 && (
-            <>
-              <p style={{ marginBottom: '1.5rem', color: 'var(--text-muted)' }}>
-                Showing {campaigns.length} approved campaign{campaigns.length !== 1 ? 's' : ''}
-              </p>
-              <div className="grid-3">
-                {campaigns.map((c) => (
-                  <CampaignCard key={c._id} campaign={c} />
-                ))}
-              </div>
-            </>
-          )}
-
-          {/* Empty State */}
-          {!loading && !error && campaigns.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '5rem 0' }}>
-              <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📢</div>
-              <h3 style={{ marginBottom: '0.75rem' }}>No Campaigns Yet</h3>
-              <p style={{ marginBottom: '1.5rem' }}>
-                Be the first to share your e-waste awareness campaign with the community!
-              </p>
-              <Link to="/upload" className="btn btn-primary">Upload a Campaign</Link>
-            </div>
-          )}
+          <p style={{ marginBottom: '1.5rem', color: 'var(--text-muted)' }}>
+            Showing {CAMPAIGNS.length} approved campaigns
+          </p>
+          <div className="grid-3">
+            {CAMPAIGNS.map((c) => (
+              <CampaignCard key={c._id} campaign={c} />
+            ))}
+          </div>
         </div>
       </section>
     </div>
