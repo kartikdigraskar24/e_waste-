@@ -52,37 +52,21 @@ app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
-// ─── MongoDB Connection (serverless-safe with connection caching) ─────────────
-let isConnected = false;
-
+// ─── MongoDB Connection ───────────────────────────────────────────────────────
 const connectDB = async () => {
-  if (isConnected) return; // Reuse existing connection in serverless environment
+  if (mongoose.connection.readyState >= 1) return;
   await mongoose.connect(process.env.MONGO_URI);
-  isConnected = true;
   console.log('✅ MongoDB connected successfully');
 };
 
-// For local development: connect once and start server
-if (process.env.NODE_ENV !== 'production') {
-  connectDB()
-    .then(() => {
-      app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
-    })
-    .catch((err) => {
-      console.error('❌ MongoDB connection error:', err.message);
-      process.exit(1);
-    });
-} else {
-  // In production (Vercel), connect on first request via middleware
-  app.use(async (req, res, next) => {
-    try {
-      await connectDB();
-      next();
-    } catch (err) {
-      console.error('❌ MongoDB connection error:', err.message);
-      res.status(500).json({ message: 'Database connection failed' });
-    }
+// Always connect and start listening (works on Render as a regular Node server)
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+  })
+  .catch((err) => {
+    console.error('❌ MongoDB connection error:', err.message);
+    process.exit(1);
   });
-}
 
 module.exports = app;
